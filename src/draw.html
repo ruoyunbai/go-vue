@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<style>
+    body{
+        margin: 0;
+    }
+</style>
+    <title>Draw-line</title>
+</head>
+
+<body>
+    <canvas id="firstCanvas" width="900" height="900"></canvas>
+    <canvas id="secondCanvas" width="900" height="900"></canvas>
+    <script>
+        width=window.innerWidth;
+        height=window.innerHeight;
+        let canvas1 = document.querySelector("#firstCanvas");
+        let ctx1 = canvas1.getContext("2d");
+        canvas1.width=width;
+        canvas1,height=height;
+        ctx1.fillStyle = "rgb(0,0,0)";
+        ctx1.fillRect(0, 0, width, height);
+        ctx1.lineWidth = 5;
+        ctx1.strokeStyle = "rgb(0,0,255)";
+        let i = 10;
+        
+        function draw() {
+            ctx1.fillStyle = "rgb(0,0,0,0.25)";
+            ctx1.fillRect(0, 0, width, height);
+            ctx1.strokeStyle = randomColor();
+            ctx1.beginPath();
+            ctx1.moveTo(i, 0);
+            ctx1.lineTo(0, i);
+            ctx1.stroke();
+            ctx1.beginPath();
+            ctx1.moveTo(width-i, 0);
+            ctx1.lineTo(width, i);
+            ctx1.stroke();
+            i += 10;
+            if (i > 2*width) i = 0;
+            requestAnimationFrame(draw);
+        }
+        draw();
+        function randomColor() {
+            return 'rgb(' +
+                random(0, 255) + ', ' +
+                random(0, 255) + ', ' +
+                random(0, 255) + ')';
+        }
+        function random(min, max) {
+            const num = Math.floor(Math.random() * (max - min)) + min;
+            return num;
+        }
+        function degToRad(degrees) {
+            return degrees * Math.PI / 180;
+        };
+    </script>
+</body>
+
+</html>
